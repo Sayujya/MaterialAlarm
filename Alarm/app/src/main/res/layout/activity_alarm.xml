@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/alarm_activity_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context="com.sairijal.alarm.AddAlarmActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar_alarm_activity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:titleTextColor="@color/colorPrimaryTextLight"
+        android:background="@color/colorPrimary">
+
+    </android.support.v7.widget.Toolbar>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:weightSum="100">
+
+        <RelativeLayout
+            android:id="@+id/add_alarm_image"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="30"
+            android:background="@color/colorPrimary"
+            android:orientation="horizontal"
+            android:elevation="4dp">
+            <!--<ImageButton IMAGEBUTTONS FOR NEXT DAY
+                android:id="@+id/previous_day"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:padding="@dimen/icon_padding"
+                android:background="@null"
+                android:src="@drawable/ic_keyboard_arrow_left_white_36dp"/>
+            <ImageButton
+                android:id="@+id/next_day"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:padding="@dimen/icon_padding"
+                android:background="@null"
+                android:src="@drawable/ic_keyboard_arrow_right_white_36dp"/>-->
+            <TextView
+                android:id="@+id/current_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:textColor="@color/colorPrimaryTextLight"
+                android:textSize="@dimen/clock_text_size"
+                android:text="@string/current_time_placeholder"
+                android:fontFamily="sans-serif"/>
+            <TextView
+                android:id="@+id/current_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/current_time"
+                android:layout_centerHorizontal="true"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="@dimen/date_text_size"
+                android:text="@string/current_date_placeholder"
+                android:fontFamily="sans-serif"
+                android:textStyle="bold"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/day_layout"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="5"
+            android:background="@color/colorSecondaryText"
+            android:orientation="horizontal"
+            android:elevation="2dp">
+
+            <TextView
+                android:id="@+id/current_day"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:textColor="@color/colorPrimaryTextLight"
+                android:textSize="@dimen/date_text_size"
+                android:text="@string/day_name_placeholder"/>
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/fragment_holder"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="65"
+            android:orientation="vertical" />
+
+    </LinearLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_add_alarm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:transitionName="@string/add_alarm_transition"
+        android:layout_margin="16dp"
+        android:clickable="true"
+        android:src="@drawable/ic_add_alarm_white_24dp"
+        app:layout_anchor="@id/add_alarm_image"
+        app:layout_anchorGravity="bottom|right|end" />
+
+</android.support.design.widget.CoordinatorLayout>
