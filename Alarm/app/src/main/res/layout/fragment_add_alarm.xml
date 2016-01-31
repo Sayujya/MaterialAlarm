@@ -2,28 +2,182 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/time_picker_layout"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:paddingBottom="@dimen/card_margin_bottom"
+        android:paddingLeft="@dimen/activity_vertical_margin"
+        android:paddingStart="@dimen/activity_vertical_margin"
+        android:paddingRight="@dimen/card_margin_right"
+        android:paddingEnd="@dimen/card_margin_right"
+        android:paddingTop="@dimen/card_margin_top">
+        <RelativeLayout
+            android:id="@+id/time_picker_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="start|center_vertical"
+            android:minWidth="@dimen/icon_container_padding">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/icon_padding"
+                android:src="@drawable/ic_alarm_black_24dp"
+                android:contentDescription="@string/description_alarm_time"/>
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_toRightOf="@id/time_picker_icon"
+            android:layout_toEndOf="@id/time_picker_icon"
+            android:layout_centerVertical="true">
+            <TextView
+                android:id="@+id/time_picker"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/alarm_time_placeholder"
+                android:textColor="@color/colorPrimaryText"
+                android:textSize="@dimen/primary_text_size"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/time_picker_assist"
+                android:text="@string/alarm_time_assist"
+                android:textColor="@color/colorSecondaryText"
+                android:textSize="@dimen/secondary_text_size" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/name_layout"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_below="@id/time_picker_layout"
+        android:paddingBottom="@dimen/card_margin_bottom"
+        android:paddingLeft="@dimen/activity_vertical_margin"
+        android:paddingStart="@dimen/activity_vertical_margin"
+        android:paddingRight="@dimen/card_margin_right"
+        android:paddingEnd="@dimen/card_margin_right"
+        android:paddingTop="@dimen/card_margin_top">
+
+        <RelativeLayout
+            android:id="@+id/name_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="start|center_vertical"
+            android:minWidth="@dimen/icon_container_padding">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/icon_padding"
+                android:src="@drawable/ic_label_black_24dp"
+                android:contentDescription="@string/description_alarm_label"/>
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_toRightOf="@id/name_icon"
+            android:layout_toEndOf="@id/name_icon"
+            android:layout_centerVertical="true">
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <EditText
+                    android:id="@+id/name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/hint_alarm_label"
+                    android:textColor="@color/colorPrimaryText"
+                    android:textSize="@dimen/primary_text_size"
+                    />
+            </android.support.design.widget.TextInputLayout>
+        </LinearLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/repeating_layout"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_below="@id/name_layout"
+        android:paddingBottom="@dimen/card_margin_bottom"
+        android:paddingLeft="@dimen/activity_vertical_margin"
+        android:paddingStart="@dimen/activity_vertical_margin"
+        android:paddingRight="@dimen/card_margin_right"
+        android:paddingEnd="@dimen/card_margin_right"
+        android:paddingTop="@dimen/card_margin_top">
+
+        <RelativeLayout
+            android:id="@+id/repeating_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="start|center_vertical"
+            android:minWidth="@dimen/icon_container_padding">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/icon_padding"
+                android:src="@drawable/ic_repeat_black_24dp"
+                android:contentDescription="@string/description_alarm_repeating"/>
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="@dimen/leaf_margin_top"
+            android:layout_toRightOf="@id/repeating_icon"
+            android:layout_toEndOf="@id/repeating_icon"
+            android:layout_centerVertical="true">
+            <!-- todo add repeating times-->
+        </LinearLayout>
+    </RelativeLayout>
+
+    <View
+        android:id="@+id/name_divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/repeating_layout"
+        android:background="@color/colorDivider" />
+
     <LinearLayout
         android:id="@+id/add_alarm_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:paddingBottom="@dimen/card_margin_bottom"
         android:weightSum="2"
         android:orientation="horizontal">
-        <Button
+        <android.support.v7.widget.AppCompatButton
             android:id="@+id/add_cancel"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@color/materialRed"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginEnd="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
             android:textColor="@color/colorPrimaryTextLight"
-            android:text="@string/add_cancel_text"/>
-        <Button
+            android:text="@string/add_cancel_text"
+            android:theme="@style/AppTheme.CancelButton"/>
+        <android.support.v7.widget.AppCompatButton
             android:id="@+id/add_confirm"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@color/materialGreen"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginEnd="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
             android:textColor="@color/colorPrimaryTextLight"
-            android:text="@string/add_confirm_text"/>
+            android:text="@string/add_confirm_text"
+            android:theme="@style/AppTheme.ConfirmButton" />
     </LinearLayout>
+
+
 </RelativeLayout>

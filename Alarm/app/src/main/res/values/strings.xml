@@ -16,4 +16,6 @@
     <string name="alarm_days_text">Mo Tu We Th Fr Sa Su</string>
     <string name="add_cancel_text">Cancel</string>
     <string name="add_confirm_text">Confirm</string>
+    <string name="description_alarm_repeating">Choose days to repeat this alarm on</string>
+    <string name="hint_alarm_label">Label</string>
 </resources>

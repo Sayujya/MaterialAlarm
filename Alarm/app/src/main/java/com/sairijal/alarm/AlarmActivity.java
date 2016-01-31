@@ -9,6 +9,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
@@ -145,6 +146,7 @@ public class AlarmActivity extends AppCompatActivity {
         mFragmentTransaction = mFragmentManager.beginTransaction();
         AddAlarmFragment addAlarmFragment= new AddAlarmFragment();
         mFragmentTransaction.replace(R.id.fragment_holder, addAlarmFragment).addToBackStack("Add Alarm");
+        Log.i("Material compass", "Added to backstack");
         mFragmentTransaction.commit();
     }
 

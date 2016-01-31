@@ -33,11 +33,6 @@ public class AlarmViewFragment extends Fragment {
 
         // link recylerview to layout for alarms
         mRecyclerView = (RecyclerView) mMainView.findViewById(R.id.alarm_recycler_view);
-
-        // enable fab on alarm activity
-        if (getActivity() instanceof AlarmActivity) {
-            ((AlarmActivity) getActivity()).enableFab();
-        }
     }
 
 
@@ -64,5 +59,13 @@ public class AlarmViewFragment extends Fragment {
         ItemTouchHelper touchHelper = new ItemTouchHelper(swipeCallback);
         touchHelper.attachToRecyclerView(mRecyclerView);
 
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (getActivity() instanceof AlarmActivity){
+            ((AlarmActivity) getActivity()).enableFab();
+        }
     }
 }

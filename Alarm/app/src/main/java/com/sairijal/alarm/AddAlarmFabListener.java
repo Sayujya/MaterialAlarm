@@ -1,6 +1,7 @@
 package com.sairijal.alarm;
 
 import android.content.Context;
+import android.support.design.widget.FloatingActionButton;
 import android.view.View;
 
 /**
@@ -17,7 +18,10 @@ public class AddAlarmFabListener implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
-        ((AlarmActivity)mContext).replaceWithAddFragment();
+        if (mContext instanceof AlarmActivity) {
+            ((AlarmActivity) mContext).replaceWithAddFragment();
+            ((AlarmActivity) mContext).disableFab();
+        }
     }
 
 }
