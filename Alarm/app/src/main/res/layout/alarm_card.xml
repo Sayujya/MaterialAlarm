@@ -100,7 +100,9 @@
         android:paddingStart="@dimen/activity_vertical_margin"
         android:paddingRight="@dimen/card_margin_right"
         android:paddingEnd="@dimen/card_margin_right"
-        android:paddingTop="@dimen/card_margin_top">
+        android:paddingTop="@dimen/card_margin_top"
+        android:background="?android:attr/selectableItemBackground"
+        android:clickable="true">
         <RelativeLayout
             android:id="@+id/alarm_card_icon_layout"
             android:layout_width="wrap_content"

@@ -128,12 +128,89 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="horizontal"
-            android:padding="@dimen/leaf_margin_top"
             android:layout_toRightOf="@id/repeating_icon"
             android:layout_toEndOf="@id/repeating_icon"
-            android:layout_centerVertical="true">
+            android:layout_centerVertical="true"
+            android:weightSum="7">
+            <ToggleButton
+                android:id="@+id/monday_repeating"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:textOn="@string/monday_short"
+                android:textOff="@string/monday_short"
+                android:textAllCaps="false"
+                android:gravity="center"
+                android:background="?android:attr/selectableItemBackground"
+                android:clickable="true"/>
+            <ToggleButton
+                android:id="@+id/tuesday_repeating"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:textOn="@string/tuesday_short"
+                android:textOff="@string/tuesday_short"
+                android:textAllCaps="false"
+                android:gravity="center"
+                android:background="?android:attr/selectableItemBackground"
+                android:clickable="true"/>
+            <ToggleButton
+                android:id="@+id/wednesday_repeating"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:textOn="@string/wednesday_short"
+                android:textOff="@string/wednesday_short"
+                android:textAllCaps="false"
+                android:gravity="center"
+                android:background="?android:attr/selectableItemBackground"
+                android:clickable="true"/>
+            <ToggleButton
+                android:id="@+id/thursday_repeating"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:textOn="@string/thursday_short"
+                android:textOff="@string/thursday_short"
+                android:textAllCaps="false"
+                android:gravity="center"
+                android:background="?android:attr/selectableItemBackground"
+                android:clickable="true"/>
+            <ToggleButton
+                android:id="@+id/friday_repeating"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:textOn="@string/friday_short"
+                android:textOff="@string/friday_short"
+                android:textAllCaps="false"
+                android:gravity="center"
+                android:background="?android:attr/selectableItemBackground"
+                android:clickable="true"/>
+            <ToggleButton
+                android:id="@+id/sunday_repeating"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:textOn="@string/saturday_short"
+                android:textOff="@string/saturday_short"
+                android:textAllCaps="false"
+                android:gravity="center"
+                android:background="?android:attr/selectableItemBackground"
+                android:clickable="true"/>
+            <ToggleButton
+                android:id="@+id/saturday_repeating"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:textOn="@string/sunday_short"
+                android:textOff="@string/sunday_short"
+                android:textAllCaps="false"
+                android:gravity="center"
+                android:background="?android:attr/selectableItemBackground"
+                android:clickable="true" />
             <!-- todo add repeating times-->
         </LinearLayout>
     </RelativeLayout>

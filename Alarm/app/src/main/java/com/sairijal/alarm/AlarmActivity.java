@@ -1,5 +1,6 @@
 package com.sairijal.alarm;
 
+import android.app.DialogFragment;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -10,6 +11,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
@@ -151,10 +153,15 @@ public class AlarmActivity extends AppCompatActivity {
     }
 
     public void disableFab(){
-        this.mAddFab.setEnabled(false);
+        this.mAddFab.setVisibility(View.GONE);
     }
 
     public void enableFab(){
-        this.mAddFab.setEnabled(true);
+        this.mAddFab.setVisibility(View.VISIBLE);
+    }
+
+    public void showTimePickerDialog(View v) {
+        DialogFragment newFragment = new TimePickerFragment();
+        newFragment.show(getFragmentManager(), "timePicker");
     }
 }

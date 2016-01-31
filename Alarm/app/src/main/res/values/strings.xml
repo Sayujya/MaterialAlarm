@@ -18,4 +18,11 @@
     <string name="add_confirm_text">Confirm</string>
     <string name="description_alarm_repeating">Choose days to repeat this alarm on</string>
     <string name="hint_alarm_label">Label</string>
+    <string name="sunday_short">Su</string>
+    <string name="monday_short">Mo</string>
+    <string name="tuesday_short">Tu</string>
+    <string name="wednesday_short">We</string>
+    <string name="thursday_short">Th</string>
+    <string name="friday_short">Fr</string>
+    <string name="saturday_short">Sa</string>
 </resources>
