@@ -160,8 +160,11 @@ public class AlarmActivity extends AppCompatActivity {
         this.mAddFab.setVisibility(View.VISIBLE);
     }
 
-    public void showTimePickerDialog(View v) {
+    public void showTimePickerDialog(AlarmTimeSetListener alarmTimeSetListener) {
         DialogFragment newFragment = new TimePickerFragment();
+        Bundle args = new Bundle();
+        args.putParcelable("Alarm Set Listener", alarmTimeSetListener);
+        newFragment.setArguments(args);
         newFragment.show(getFragmentManager(), "timePicker");
     }
 }

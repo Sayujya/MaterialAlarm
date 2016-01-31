@@ -12,8 +12,9 @@ import java.util.Calendar;
 /**
  * Created by sayujya on 2016-01-30.
  */
-public static class TimePickerFragment extends DialogFragment
-            implements TimePickerDialog.OnTimeSetListener {
+public class TimePickerFragment extends DialogFragment {
+
+
 
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -22,8 +23,9 @@ public static class TimePickerFragment extends DialogFragment
             int hour = c.get(Calendar.HOUR_OF_DAY);
             int minute = c.get(Calendar.MINUTE);
 
-            // Create a new instance of TimePickerDialog and return it
-            return new TimePickerDialog(getActivity(), this, hour, minute,
+            AlarmTimeSetListener alarmTimeSetListener = getArguments().getParcelable("Alarm Set Listener");
+
+            return new TimePickerDialog(getActivity(), alarmTimeSetListener, hour, minute,
                     DateFormat.is24HourFormat(getActivity()));
         }
 
@@ -31,4 +33,3 @@ public static class TimePickerFragment extends DialogFragment
             // Do something with the time chosen by the user
         }
     }
-}
