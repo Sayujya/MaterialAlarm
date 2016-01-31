@@ -40,9 +40,6 @@ public class AddAlarmFragment extends Fragment {
     @Override
     public void onPause() {
         super.onPause();
-        if (getActivity() instanceof AlarmActivity){
-            ((AlarmActivity) getActivity()).enableFab();
-        }
     }
 
     @Override
@@ -53,6 +50,9 @@ public class AddAlarmFragment extends Fragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
+        if (getActivity() instanceof AlarmActivity){
+            ((AlarmActivity) getActivity()).enableFab(true);
+        }
     }
 
     private void initalizeViews() {

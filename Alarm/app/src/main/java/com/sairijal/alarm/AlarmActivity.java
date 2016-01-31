@@ -22,6 +22,8 @@ import java.util.Locale;
 
 public class AlarmActivity extends AppCompatActivity {
 
+    private final static String APP_TAG = "Material Alarm";
+
     // Views
     private TextView mDate;
     private TextView mTime;
@@ -31,6 +33,13 @@ public class AlarmActivity extends AppCompatActivity {
     // fragment manager
     private FragmentManager mFragmentManager = getSupportFragmentManager();
     private FragmentTransaction mFragmentTransaction;
+
+    // fragment tags
+    private final static String ALARM_VIEW_FRAGMENT = "ALARM_VIEW_FRAGMENT";
+    private final static String ALARM_ADD_FRAGMENT = "ALARM_ADD_FRAGMENT";
+
+    // parcelable tags
+    private final static String TIME_CHANGED_LISTENER = "Alarm Set Listener";
 
     // receivers
     private BroadcastReceiver mTimeBroadcastReceiver;
@@ -124,7 +133,7 @@ public class AlarmActivity extends AppCompatActivity {
     private void initializeFragment() {
         mFragmentTransaction = mFragmentManager.beginTransaction();
         AlarmViewFragment alarmViewFragment = new AlarmViewFragment();
-        mFragmentTransaction.add(R.id.fragment_holder, alarmViewFragment);
+        mFragmentTransaction.add(R.id.fragment_holder, alarmViewFragment, ALARM_VIEW_FRAGMENT);
         mFragmentTransaction.commit();
     }
 
@@ -144,27 +153,32 @@ public class AlarmActivity extends AppCompatActivity {
         mDay.setText(mWatchDay.format(currentDate));
     }
 
-
-
     protected void replaceWithAddFragment() {
         mFragmentTransaction = mFragmentManager.beginTransaction();
         AddAlarmFragment addAlarmFragment= new AddAlarmFragment();
-        mFragmentTransaction.replace(R.id.fragment_holder, addAlarmFragment).addToBackStack("Add Alarm");
-        Log.i("Material compass", "Added to backstack");
+        mFragmentTransaction.replace(R.id.fragment_holder, addAlarmFragment, ALARM_ADD_FRAGMENT).addToBackStack(ALARM_VIEW_FRAGMENT);
         mFragmentTransaction.commit();
     }
 
-    public void disableFab(){
+    public void disableFab(boolean animate){
         mAddFab.setClickable(false);
-        Animation disableAnimation =  AnimationUtils.loadAnimation(this, R.anim.scale_out);
-        disableAnimation.setAnimationListener(new FabDisableAnimationListener(mAddFab));
-        mAddFab.setAnimation(disableAnimation);
+        if (animate) {
+            Animation disableAnimation = AnimationUtils.loadAnimation(this, R.anim.scale_out);
+            disableAnimation.setAnimationListener(new FabDisableAnimationListener(mAddFab));
+            mAddFab.setAnimation(disableAnimation);
+        } else {
+            mAddFab.setVisibility(View.INVISIBLE);
+        }
     }
 
-    public void enableFab(){
-        Animation enableAnimation =  AnimationUtils.loadAnimation(this, R.anim.scale_in);
-        enableAnimation.setAnimationListener(new FabEnableAnimationListener(mAddFab));
-        mAddFab.setAnimation(enableAnimation);
+    public void enableFab(boolean animate){
+        if (animate) {
+            Animation enableAnimation = AnimationUtils.loadAnimation(this, R.anim.scale_in);
+            enableAnimation.setAnimationListener(new FabEnableAnimationListener(mAddFab));
+            mAddFab.setAnimation(enableAnimation);
+        } else {
+            mAddFab.setVisibility(View.VISIBLE);
+        }
         mAddFab.setClickable(true);
     }
 

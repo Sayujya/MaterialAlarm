@@ -20,7 +20,7 @@ public class AddAlarmFabListener implements View.OnClickListener {
     public void onClick(View view) {
         if (mContext instanceof AlarmActivity) {
             ((AlarmActivity) mContext).replaceWithAddFragment();
-            ((AlarmActivity) mContext).disableFab();
+            ((AlarmActivity) mContext).disableFab(true);
         }
     }
 
