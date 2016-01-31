@@ -155,6 +155,7 @@ public class AlarmActivity extends AppCompatActivity {
     }
 
     public void disableFab(){
+        mAddFab.setClickable(false);
         Animation disableAnimation =  AnimationUtils.loadAnimation(this, R.anim.scale_out);
         disableAnimation.setAnimationListener(new FabDisableAnimationListener(mAddFab));
         mAddFab.setAnimation(disableAnimation);
@@ -164,6 +165,7 @@ public class AlarmActivity extends AppCompatActivity {
         Animation enableAnimation =  AnimationUtils.loadAnimation(this, R.anim.scale_in);
         enableAnimation.setAnimationListener(new FabEnableAnimationListener(mAddFab));
         mAddFab.setAnimation(enableAnimation);
+        mAddFab.setClickable(true);
     }
 
     public void showTimePickerDialog(AlarmTimeSetListener alarmTimeSetListener) {

@@ -22,7 +22,7 @@ public class FabDisableAnimationListener implements Animation.AnimationListener 
 
     @Override
     public void onAnimationEnd(Animation animation) {
-        mFab.setVisibility(View.GONE);
+        mFab.setVisibility(View.INVISIBLE);
     }
 
     @Override

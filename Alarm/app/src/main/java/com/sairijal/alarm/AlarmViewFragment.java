@@ -64,8 +64,5 @@ public class AlarmViewFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        if (getActivity() instanceof AlarmActivity){
-            ((AlarmActivity) getActivity()).enableFab();
-        }
     }
 }
