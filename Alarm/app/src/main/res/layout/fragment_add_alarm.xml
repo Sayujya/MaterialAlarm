@@ -55,7 +55,7 @@
     <RelativeLayout
         android:id="@+id/name_layout"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="80dp"
         android:layout_below="@id/time_picker_layout"
         android:paddingBottom="@dimen/card_margin_bottom"
         android:paddingLeft="@dimen/activity_vertical_margin"
@@ -80,18 +80,18 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical"
             android:layout_toRightOf="@id/name_icon"
             android:layout_toEndOf="@id/name_icon"
             android:layout_centerVertical="true">
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="match_parent">
                 <EditText
                     android:id="@+id/name"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:hint="@string/hint_alarm_label"
                     android:textColor="@color/colorPrimaryText"
                     android:textSize="@dimen/primary_text_size"
