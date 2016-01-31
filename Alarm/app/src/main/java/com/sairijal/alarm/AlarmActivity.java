@@ -12,6 +12,8 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
@@ -153,11 +155,15 @@ public class AlarmActivity extends AppCompatActivity {
     }
 
     public void disableFab(){
-        this.mAddFab.setVisibility(View.GONE);
+        Animation disableAnimation =  AnimationUtils.loadAnimation(this, R.anim.scale_out);
+        disableAnimation.setAnimationListener(new FabDisableAnimationListener(mAddFab));
+        mAddFab.setAnimation(disableAnimation);
     }
 
     public void enableFab(){
-        this.mAddFab.setVisibility(View.VISIBLE);
+        Animation enableAnimation =  AnimationUtils.loadAnimation(this, R.anim.scale_in);
+        enableAnimation.setAnimationListener(new FabEnableAnimationListener(mAddFab));
+        mAddFab.setAnimation(enableAnimation);
     }
 
     public void showTimePickerDialog(AlarmTimeSetListener alarmTimeSetListener) {
