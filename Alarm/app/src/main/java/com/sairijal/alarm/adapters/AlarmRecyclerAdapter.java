@@ -1,4 +1,4 @@
-package com.sairijal.alarm;
+package com.sairijal.alarm.adapters;
 
 import android.content.Context;
 import android.support.design.widget.Snackbar;
@@ -17,11 +17,12 @@ import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.sairijal.alarm.R;
+import com.sairijal.alarm.activities.AlarmActivity;
+import com.sairijal.alarm.alarm.AlarmWrapper;
 import com.sairijal.alarm.listeners.UndoDeleteListener;
 
-import java.sql.Time;
 import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;

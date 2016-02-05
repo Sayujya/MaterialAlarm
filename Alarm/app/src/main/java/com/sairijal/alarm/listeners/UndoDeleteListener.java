@@ -1,10 +1,8 @@
 package com.sairijal.alarm.listeners;
 
-import android.content.Context;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-import com.sairijal.alarm.AlarmRecyclerAdapter;
+import com.sairijal.alarm.adapters.AlarmRecyclerAdapter;
 
 /**
  * Created by sayujya on 2016-01-29.

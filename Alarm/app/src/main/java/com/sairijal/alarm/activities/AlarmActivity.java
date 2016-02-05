@@ -1,4 +1,4 @@
-package com.sairijal.alarm;
+package com.sairijal.alarm.activities;
 
 import android.app.DialogFragment;
 import android.content.BroadcastReceiver;
@@ -15,6 +15,8 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
+import com.sairijal.alarm.alarm.AlarmWrapper;
+import com.sairijal.alarm.R;
 import com.sairijal.alarm.fragments.AddAlarmFragment;
 import com.sairijal.alarm.fragments.AlarmViewFragment;
 import com.sairijal.alarm.fragments.TimePickerFragment;

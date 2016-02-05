@@ -1,10 +1,9 @@
 package com.sairijal.alarm.listeners;
 
 import android.content.Context;
-import android.support.design.widget.FloatingActionButton;
 import android.view.View;
 
-import com.sairijal.alarm.AlarmActivity;
+import com.sairijal.alarm.activities.AlarmActivity;
 
 /**
  * Created by sayujya on 2016-01-28.

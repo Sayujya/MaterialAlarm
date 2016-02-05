@@ -1,6 +1,5 @@
 package com.sairijal.alarm.fragments;
 
-import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -12,11 +11,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.sairijal.alarm.Alarm;
-import com.sairijal.alarm.AlarmActivity;
-import com.sairijal.alarm.AlarmRecyclerAdapter;
-import com.sairijal.alarm.AlarmSwipeTouchHelperCallback;
-import com.sairijal.alarm.AlarmWrapper;
+import com.sairijal.alarm.alarm.Alarm;
+import com.sairijal.alarm.adapters.AlarmRecyclerAdapter;
+import com.sairijal.alarm.callbacks.AlarmSwipeTouchHelperCallback;
+import com.sairijal.alarm.alarm.AlarmWrapper;
 import com.sairijal.alarm.R;
 import com.sairijal.alarm.application.AlarmApplication;
 

@@ -1,13 +1,7 @@
-package com.sairijal.alarm;
-
-import java.sql.Time;
-import java.util.Date;
-import java.text.SimpleDateFormat;
-import java.util.Locale;
+package com.sairijal.alarm.alarm;
 
 import io.realm.RealmObject;
 import io.realm.annotations.Ignore;
-import io.realm.annotations.Required;
 
 /**
  * Created by sayujya on 2016-01-21.

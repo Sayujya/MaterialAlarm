@@ -1,4 +1,4 @@
-package com.sairijal.alarm;
+package com.sairijal.alarm.alarm;
 
 import junit.framework.Assert;
 

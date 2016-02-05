@@ -2,7 +2,6 @@ package com.sairijal.alarm.fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,9 +10,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
-import com.sairijal.alarm.Alarm;
-import com.sairijal.alarm.AlarmActivity;
-import com.sairijal.alarm.AlarmWrapper;
+import com.sairijal.alarm.alarm.Alarm;
+import com.sairijal.alarm.activities.AlarmActivity;
+import com.sairijal.alarm.alarm.AlarmWrapper;
 import com.sairijal.alarm.R;
 import com.sairijal.alarm.listeners.AddAlarmClickListener;
 import com.sairijal.alarm.listeners.AlarmTimeSetListener;

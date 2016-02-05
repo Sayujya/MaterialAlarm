@@ -1,4 +1,4 @@
-package com.sairijal.alarm;
+package com.sairijal.alarm.activities;
 
 import android.os.Build;
 import android.support.v7.app.ActionBar;
@@ -9,6 +9,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Window;
+
+import com.sairijal.alarm.R;
 
 public class AddAlarmActivity extends AppCompatActivity {
 

@@ -1,7 +1,9 @@
-package com.sairijal.alarm;
+package com.sairijal.alarm.callbacks;
 
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
+
+import com.sairijal.alarm.adapters.ItemTouchHelperAdapter;
 
 /**
  * Created by sayujya on 2016-01-29.

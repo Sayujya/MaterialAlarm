@@ -1,4 +1,4 @@
-package com.sairijal.alarm;
+package com.sairijal.alarm.adapters;
 
 /**
  * Created by sayujya on 2016-01-29.
