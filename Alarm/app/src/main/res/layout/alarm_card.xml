@@ -117,7 +117,7 @@
                 android:contentDescription="@string/description_alarm_time"/>
         </RelativeLayout>
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -126,21 +126,34 @@
             android:layout_centerVertical="true">
             <TextView
                 android:id="@+id/alarm_time"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:paddingRight="@dimen/leaf_margin_right"
                 android:text="@string/alarm_time_placeholder"
                 android:textColor="@color/colorPrimaryText"
                 android:fontFamily="sans-serif-light"
-                android:textSize="40sp"
+                android:textSize="40sp" />
+            <TextView
+                android:id="@+id/alarm_ampm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/alarm_time"
+                android:layout_toEndOf="@id/alarm_time"
+                android:layout_alignBaseline="@id/alarm_time"
+                android:text="@string/alarm_ampm_placeholder"
+                android:textColor="@color/colorPrimaryText"
+                android:fontFamily="sans-serif-light"
+                android:textSize="15sp"
                 />
             <TextView
                 android:id="@+id/alarm_days"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_below="@id/alarm_time"
                 android:text="@string/alarm_days_text"
                 android:textColor="@color/colorSecondaryText"
                 android:textSize="@dimen/secondary_text_size" />
-        </LinearLayout>
+        </RelativeLayout>
         <RelativeLayout
             android:id="@+id/alarm_card_buttons"
             android:layout_width="wrap_content"

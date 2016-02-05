@@ -1,4 +1,4 @@
-package com.sairijal.alarm;
+package com.sairijal.alarm.listeners;
 
 import android.support.design.widget.FloatingActionButton;
 import android.view.View;
@@ -7,11 +7,11 @@ import android.view.animation.Animation;
 /**
  * Created by sayujya on 2016-01-30.
  */
-public class FabDisableAnimationListener implements Animation.AnimationListener {
+public class FabEnableAnimationListener implements Animation.AnimationListener {
 
     FloatingActionButton mFab;
 
-    public FabDisableAnimationListener(FloatingActionButton mFab) {
+    public FabEnableAnimationListener(FloatingActionButton mFab) {
         this.mFab = mFab;
     }
 
@@ -22,7 +22,7 @@ public class FabDisableAnimationListener implements Animation.AnimationListener 
 
     @Override
     public void onAnimationEnd(Animation animation) {
-        mFab.setVisibility(View.INVISIBLE);
+        mFab.setVisibility(View.VISIBLE);
     }
 
     @Override

@@ -1,55 +1,52 @@
 package com.sairijal.alarm;
 
-import android.media.Ringtone;
-
-import com.orm.SugarRecord;
-
 import java.sql.Time;
+import java.util.Date;
 import java.text.SimpleDateFormat;
+import java.util.Locale;
+
+import io.realm.RealmObject;
+import io.realm.annotations.Ignore;
+import io.realm.annotations.Required;
 
 /**
  * Created by sayujya on 2016-01-21.
  */
-public class Alarm extends SugarRecord implements Comparable{
-    public static final int DISTANCE = 0;
-    public static final int MATH = 1;
-    public static final int NONE = 2;
-    public static final int ON = 3;
-    public static final int OFF = 4;
-    public static final int SNOOZE = 5;
-    private static final String[] days = new String[]{"Su, M, T, W, Th, F, S"};
-
-
-    private static int snoozeTime = 10;
-
-    private Time time;
+public class Alarm extends RealmObject{
+    private long time;
     private int authenticationType;
     private int state;
+    private boolean repeatingMonday;
+    private boolean repeatingTuesday;
+    private boolean repeatingWednesday;
+    private boolean repeatingThursday;
+    private boolean repeatingFriday;
+    private boolean repeatingSaturday;
+    private boolean repeatingSunday;
     private String label;
-    private Ringtone ringtone;
 
-    // boolean to see if the alarm is repeating
-    boolean[] repeating = new boolean[]{false, false, false, false, false, false, false};
+    @Ignore
+    public static final int DISTANCE = 0;
+    @Ignore
+    public static final int MATH = 1;
+    @Ignore
+    public static final int NONE = 2;
+    @Ignore
+    public static final int ON = 3;
+    @Ignore
+    public static final int OFF = 4;
+    @Ignore
+    public static final int SNOOZE = 5;
+    @Ignore
+    private static final String[] days = new String[]{"Su, M, T, W, Th, F, S"};
+    @Ignore
+    private static int snoozeTime = 10;
 
-    public Alarm(Time time, boolean[] repeating, int authenticationType, String label){
-        this.time = time;
-        this.authenticationType = authenticationType;
-        this.repeating = repeating;
-        this.label = label;
-        //this.ringtone = ringtone;
-        this.state = ON;
+    public long getTime() {
+        return time;
     }
 
-    public Alarm(Time time, int authenticationType, String label){
-        this(time, new boolean[7], authenticationType, label);
-    }
-
-
-    public String getTime() {
-        return new SimpleDateFormat("HH:mm").format(time);
-    }
-
-    public void setTime(Time time) {
+    public void setTime(long time) {
         this.time = time;
     }
 
@@ -61,31 +58,68 @@ public class Alarm extends SugarRecord implements Comparable{
         this.authenticationType = authenticationType;
     }
 
-    public String getState() {
-        switch (this.state){
-            case 3:
-                return "On";
-            case 4:
-                return "Off";
-            case 5:
-                return "Snooze";
-        }
-        return "Error";
+    public int getState() {
+        return state;
     }
 
+    public void setState(int state) {
+        this.state = state;
+    }
 
-    public void setState(String state) {
-        switch (state.toLowerCase()){
-            case "on":
-                this.state=ON;
-                break;
-            case "off":
-                this.state=OFF;
-                break;
-            case "snooze":
-                this.state=SNOOZE;
-                break;
-        }
+    public boolean isRepeatingMonday() {
+        return repeatingMonday;
+    }
+
+    public void setRepeatingMonday(boolean repeatingMonday) {
+        this.repeatingMonday = repeatingMonday;
+    }
+
+    public boolean isRepeatingTuesday() {
+        return repeatingTuesday;
+    }
+
+    public void setRepeatingTuesday(boolean repeatingTuesday) {
+        this.repeatingTuesday = repeatingTuesday;
+    }
+
+    public boolean isRepeatingWednesday() {
+        return repeatingWednesday;
+    }
+
+    public void setRepeatingWednesday(boolean repeatingWednesday) {
+        this.repeatingWednesday = repeatingWednesday;
+    }
+
+    public boolean isRepeatingThursday() {
+        return repeatingThursday;
+    }
+
+    public void setRepeatingThursday(boolean repeatingThursday) {
+        this.repeatingThursday = repeatingThursday;
+    }
+
+    public boolean isRepeatingFriday() {
+        return repeatingFriday;
+    }
+
+    public void setRepeatingFriday(boolean repeatingFriday) {
+        this.repeatingFriday = repeatingFriday;
+    }
+
+    public boolean isRepeatingSaturday() {
+        return repeatingSaturday;
+    }
+
+    public void setRepeatingSaturday(boolean repeatingSaturday) {
+        this.repeatingSaturday = repeatingSaturday;
+    }
+
+    public boolean isRepeatingSunday() {
+        return repeatingSunday;
+    }
+
+    public void setRepeatingSunday(boolean repeatingSunday) {
+        this.repeatingSunday = repeatingSunday;
     }
 
     public String getLabel() {
@@ -96,45 +130,39 @@ public class Alarm extends SugarRecord implements Comparable{
         this.label = label;
     }
 
-    public boolean[] getRepeating() {
-        return repeating;
+    public static int getDISTANCE() {
+        return DISTANCE;
     }
 
-    public void setRepeating(boolean... booleans) {
-        for (int i = 0; i<7; i++){
-            repeating[i] = booleans[i];
-        }
+    public static int getMATH() {
+        return MATH;
     }
 
-    public Ringtone getRingtone() {
-        return ringtone;
+    public static int getNONE() {
+        return NONE;
     }
 
-    public void setRingtone(Ringtone ringtone) {
-        this.ringtone = ringtone;
+    public static int getON() {
+        return ON;
     }
 
-    public void snooze(){
-        //snooze
-        // todo snooze code
+    public static int getOFF() {
+        return OFF;
     }
 
-    public static void changeSnoozeTime(int minutes){
-        snoozeTime = minutes;
+    public static int getSNOOZE() {
+        return SNOOZE;
     }
 
+    public static String[] getDays() {
+        return days;
+    }
 
-    @Override
-    public int compareTo(Object another) {
-        Time givenTime = ((Alarm)another).time;
+    public static int getSnoozeTime() {
+        return snoozeTime;
+    }
 
-        //ToDo check this logic
-        if (givenTime.getTime()<this.time.getTime()){
-            return -1;
-        } else if (givenTime.getTime()>this.time.getTime()) {
-            return 1;
-        } else {
-            return 0;
-        }
+    public static void setSnoozeTime(int snoozeTime) {
+        Alarm.snoozeTime = snoozeTime;
     }
 }

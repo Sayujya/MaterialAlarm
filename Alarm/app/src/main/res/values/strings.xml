@@ -25,4 +25,5 @@
     <string name="thursday_short">Th</string>
     <string name="friday_short">Fr</string>
     <string name="saturday_short">Sa</string>
+    <string name="alarm_ampm_placeholder">am</string>
 </resources>
