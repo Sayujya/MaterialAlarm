@@ -2,6 +2,7 @@ package com.sairijal.alarm.alarm;
 
 import io.realm.RealmObject;
 import io.realm.annotations.Ignore;
+import io.realm.annotations.Required;
 
 /**
  * Created by sayujya on 2016-01-21.
@@ -18,6 +19,8 @@ public class Alarm extends RealmObject{
     private boolean repeatingSaturday;
     private boolean repeatingSunday;
     private String label;
+    @Required
+    private String uniqueID;
 
     @Ignore
     public static final int DISTANCE = 0;
@@ -158,5 +161,13 @@ public class Alarm extends RealmObject{
 
     public static void setSnoozeTime(int snoozeTime) {
         Alarm.snoozeTime = snoozeTime;
+    }
+
+    public String getUniqueID() {
+        return uniqueID;
+    }
+
+    public void setUniqueID(String uniqueID) {
+        this.uniqueID = uniqueID;
     }
 }

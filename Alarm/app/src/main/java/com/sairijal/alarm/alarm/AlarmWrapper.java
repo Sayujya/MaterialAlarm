@@ -27,6 +27,10 @@ public class AlarmWrapper implements Comparable<AlarmWrapper> {
         }
     }
 
+    public Alarm getAlarm() {
+        return alarm;
+    }
+
     public String[] getTime(){
         // set formatter depending on the system date
         SimpleDateFormat formatter;
@@ -95,6 +99,18 @@ public class AlarmWrapper implements Comparable<AlarmWrapper> {
 
     public void setLabel(String label) {
         this.alarm.setLabel(label);
+    }
+
+    public String getUniqueID() {
+        return  this.alarm.getUniqueID();
+    }
+
+    public void setUniqueID(String uniqueID) {
+        this.alarm.setUniqueID(uniqueID);
+    }
+
+    public void removeFromRealm(){
+        this.alarm.removeFromRealm();
     }
 
     public static int getDISTANCE() {

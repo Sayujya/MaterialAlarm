@@ -59,7 +59,7 @@ public class AlarmViewFragment extends Fragment {
     public void onPause() {
         super.onPause();
         // clear cached alarm
-        mAdapter.clearAlarms();
+        mAdapter.clearAlarms(mRealm);
     }
 
     @Override
@@ -100,6 +100,7 @@ public class AlarmViewFragment extends Fragment {
         List<AlarmWrapper> savedAlarms = loadAlarms();
         // create and set adapter
         mAdapter = new AlarmRecyclerAdapter(this.getActivity(), savedAlarms, mLinearLayoutManager);
+        mAdapter.addRealmObject(mRealm);
         mRecyclerView.setAdapter(mAdapter);
 
         // callbacks for swipe to remove

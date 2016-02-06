@@ -22,6 +22,7 @@ import java.sql.Time;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
+import java.util.UUID;
 
 import io.realm.Realm;
 
@@ -134,6 +135,7 @@ public class AddAlarmFragment extends Fragment {
         newAlarm.setRepeatingSaturday(repeating[5]);
         newAlarm.setRepeatingSunday(repeating[6]);
         newAlarm.setAuthenticationType(alarmType);
+        newAlarm.setUniqueID(UUID.randomUUID().toString());
 
         mRealm.beginTransaction();
         newAlarm = mRealm.copyToRealm(newAlarm);

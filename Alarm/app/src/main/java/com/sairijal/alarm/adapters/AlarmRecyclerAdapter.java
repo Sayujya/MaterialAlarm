@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SwitchCompat;
 import android.text.Spannable;
 import android.text.style.ForegroundColorSpan;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -29,6 +30,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 
+import io.realm.Realm;
+
 /**
  * Created by ltorres on 2016-01-13.
  */
@@ -38,7 +41,7 @@ public class AlarmRecyclerAdapter extends RecyclerView.Adapter<AlarmRecyclerAdap
     private final String APP_TAG = "com.com.sairijal.alarm";
 
     // last removed alarm
-    private AlarmWrapper mRemovedAlarm;
+    private List<AlarmWrapper> mRemovedAlarm = new ArrayList<AlarmWrapper>();
 
     // list of alarms
     private List<AlarmWrapper> mDataset = new ArrayList<AlarmWrapper>();
@@ -48,6 +51,9 @@ public class AlarmRecyclerAdapter extends RecyclerView.Adapter<AlarmRecyclerAdap
 
     // last view animated
     private int lastPosition = -1;
+
+    // realm instance, not updated until required
+    private Realm mRealm;
 
     // context of the view
     private Context mContext;
@@ -189,25 +195,21 @@ public class AlarmRecyclerAdapter extends RecyclerView.Adapter<AlarmRecyclerAdap
     public void onItemDismiss(final int position) {
 
         // remove and cache the alarm
-        mRemovedAlarm = mDataset.remove(position);
+        mRemovedAlarm.add(mDataset.remove(position));
 
         // notify adapter that alarm has been removed
         notifyItemRemoved(position);
 
         // create arguments for snackbar
         View snackBarView = ((AlarmActivity) mContext).findViewById(R.id.alarm_activity_layout);
-        String snackBarText;
-        if (android.text.format.DateFormat.is24HourFormat(mContext)) {
-             snackBarText = mRemovedAlarm.getTime() + " alarm deleted";
-        } else {
-            snackBarText = mRemovedAlarm.getTime() + " alarm deleted";
-        }
+        String[] snackBarText = mRemovedAlarm.get(mRemovedAlarm.size()-1).getTime();
+
         UndoDeleteListener undoDeleteListener = new UndoDeleteListener(this, position);
 
         // create snackbar, add action and show snackbar
-        Snackbar.make(snackBarView, snackBarText, Snackbar.LENGTH_LONG)
-                .setAction("Undo", undoDeleteListener).
-                show();
+        Snackbar deletedSnackBar = Snackbar.make(snackBarView, snackBarText[0] + " " + snackBarText[1] + " alarm deleted", Snackbar.LENGTH_LONG);
+        deletedSnackBar.setAction("Undo", undoDeleteListener);
+        deletedSnackBar.show();
 
     }
 
@@ -215,18 +217,28 @@ public class AlarmRecyclerAdapter extends RecyclerView.Adapter<AlarmRecyclerAdap
 
         scrollToPositionIfNeeded(position);
 
+        AlarmWrapper restoredAlarm = mRemovedAlarm.remove(mRemovedAlarm.size() - 1);
+
         // add alarm back to dataset
-        mDataset.add(position, mRemovedAlarm);
+        mDataset.add(position, restoredAlarm);
+
+        // save to realm
+        mRealm.beginTransaction();
+        mRealm.copyToRealm(restoredAlarm.getAlarm());
+        mRealm.commitTransaction();
 
         // notify the adapter item has been inserted
         notifyItemInserted(position);
 
     }
 
-    public void clearAlarms() {
+    public void clearAlarms(Realm realm) {
         // cleared cached alarm
-        mRemovedAlarm = null;
-
+        realm.beginTransaction();
+        for (AlarmWrapper alarm: mRemovedAlarm){
+            alarm.removeFromRealm();
+        }
+        realm.commitTransaction();
     }
 
     public void addAlarm(AlarmWrapper alarm){
@@ -239,6 +251,10 @@ public class AlarmRecyclerAdapter extends RecyclerView.Adapter<AlarmRecyclerAdap
 
     private void scrollToPositionIfNeeded(int position) {
         mLayoutManager.scrollToPosition(position);
+    }
+
+    public void addRealmObject(Realm realm){
+        this.mRealm = realm;
     }
 
 }

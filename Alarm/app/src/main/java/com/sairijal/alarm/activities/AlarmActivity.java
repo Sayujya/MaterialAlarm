@@ -182,10 +182,11 @@ public class AlarmActivity extends AppCompatActivity {
     }
 
     public void replaceWithAddFragment() {
-        mFragmentTransaction = mFragmentManager.beginTransaction();
-        mFragmentTransaction.hide(mFragmentManager.findFragmentByTag(ALARM_VIEW_FRAGMENT));
         disableFab(true);
+        mFragmentTransaction = mFragmentManager.beginTransaction();
+        mFragmentTransaction.setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left, R.anim.slide_in_left, R.anim.slide_out_right);
         mFragmentTransaction.show(mFragmentManager.findFragmentByTag(ALARM_ADD_FRAGMENT)).addToBackStack(ALARM_VIEW_FRAGMENT);
+        mFragmentTransaction.hide(mFragmentManager.findFragmentByTag(ALARM_VIEW_FRAGMENT));
         mFragmentTransaction.commit();
     }
 
@@ -222,6 +223,7 @@ public class AlarmActivity extends AppCompatActivity {
     public void addAlarm(AlarmWrapper alarm) {
         mFragmentTransaction = mFragmentManager.beginTransaction();
         AlarmViewFragment alarmViewFragment = (AlarmViewFragment) mFragmentManager.findFragmentByTag(ALARM_VIEW_FRAGMENT);
+        mFragmentTransaction.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right);
         mFragmentTransaction.hide(mFragmentManager.findFragmentByTag(ALARM_ADD_FRAGMENT));
         enableFab(true);
         mFragmentTransaction.show(mFragmentManager.findFragmentByTag(ALARM_VIEW_FRAGMENT));
