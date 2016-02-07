@@ -58,13 +58,13 @@ public class AlarmViewFragment extends Fragment {
     @Override
     public void onPause() {
         super.onPause();
-        // clear cached alarm
-        mAdapter.clearAlarms(mRealm);
     }
 
     @Override
     public void onStop() {
         super.onStop();
+        // clear cached alarm
+        mAdapter.clearAlarms(mRealm);
     }
 
     @Override
