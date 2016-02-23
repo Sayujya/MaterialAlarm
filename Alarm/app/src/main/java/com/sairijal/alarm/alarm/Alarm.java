@@ -10,7 +10,7 @@ import io.realm.annotations.Required;
 public class Alarm extends RealmObject{
     private long time;
     private int authenticationType;
-    private int state;
+    private String state;
     private boolean repeatingMonday;
     private boolean repeatingTuesday;
     private boolean repeatingWednesday;
@@ -29,15 +29,15 @@ public class Alarm extends RealmObject{
     @Ignore
     public static final int NONE = 2;
     @Ignore
-    public static final int ON = 3;
+    public static final String ON = "On";
     @Ignore
-    public static final int OFF = 4;
-    @Ignore
-    public static final int SNOOZE = 5;
+    public static final String OFF = "Off";
     @Ignore
     private static final String[] days = new String[]{"Su, M, T, W, Th, F, S"};
     @Ignore
     private static int snoozeTime = 10;
+
+    public Alarm(){ /*Required empty bean constructor*/ }
 
     public long getTime() {
         return time;
@@ -55,11 +55,11 @@ public class Alarm extends RealmObject{
         this.authenticationType = authenticationType;
     }
 
-    public int getState() {
+    public String getState() {
         return state;
     }
 
-    public void setState(int state) {
+    public void setState(String state) {
         this.state = state;
     }
 
@@ -125,30 +125,6 @@ public class Alarm extends RealmObject{
 
     public void setLabel(String label) {
         this.label = label;
-    }
-
-    public static int getDISTANCE() {
-        return DISTANCE;
-    }
-
-    public static int getMATH() {
-        return MATH;
-    }
-
-    public static int getNONE() {
-        return NONE;
-    }
-
-    public static int getON() {
-        return ON;
-    }
-
-    public static int getOFF() {
-        return OFF;
-    }
-
-    public static int getSNOOZE() {
-        return SNOOZE;
     }
 
     public static String[] getDays() {

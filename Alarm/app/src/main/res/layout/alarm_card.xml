@@ -10,7 +10,8 @@
     android:layout_marginStart="@dimen/card_margin_left"
     android:layout_marginRight="@dimen/card_margin_right"
     android:layout_marginEnd="@dimen/card_margin_right"
-    android:layout_marginTop="@dimen/card_margin_top">
+    android:layout_marginTop="@dimen/card_margin_top"
+    android:transitionName="@string/card_transition_name">
 
    <!-- <RelativeLayout
         android:id="@+id/alarm_card_layout"
@@ -110,10 +111,10 @@
             android:gravity="start|center_vertical"
             android:minWidth="@dimen/icon_container_padding">
             <ImageView
+                android:id="@+id/alarm_card_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/icon_padding"
-                android:src="@drawable/ic_alarm_black_24dp"
                 android:contentDescription="@string/description_alarm_time"/>
         </RelativeLayout>
 
@@ -132,7 +133,8 @@
                 android:text="@string/alarm_time_placeholder"
                 android:textColor="@color/colorPrimaryText"
                 android:fontFamily="sans-serif-light"
-                android:textSize="40sp" />
+                android:textSize="40sp"
+                android:transitionName="@string/card_time_transition_name"/>
             <TextView
                 android:id="@+id/alarm_ampm"
                 android:layout_width="wrap_content"
@@ -144,6 +146,7 @@
                 android:textColor="@color/colorPrimaryText"
                 android:fontFamily="sans-serif-light"
                 android:textSize="15sp"
+                android:transitionName="@string/card_ampm_transition_name"
                 />
             <TextView
                 android:id="@+id/alarm_days"
@@ -152,7 +155,8 @@
                 android:layout_below="@id/alarm_time"
                 android:text="@string/alarm_days_text"
                 android:textColor="@color/colorSecondaryText"
-                android:textSize="@dimen/secondary_text_size" />
+                android:textSize="@dimen/secondary_text_size"
+                android:transitionName="@string/card_days_transition_name"/>
         </RelativeLayout>
         <RelativeLayout
             android:id="@+id/alarm_card_buttons"

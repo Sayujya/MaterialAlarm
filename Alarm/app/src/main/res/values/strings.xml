@@ -26,4 +26,9 @@
     <string name="friday_short">Fr</string>
     <string name="saturday_short">Sa</string>
     <string name="alarm_ampm_placeholder">am</string>
+    <string name="title_activity_default_ringing">DefaultRingingActivity</string>
+    <string name="card_transition_name">card_transition</string>
+    <string name="card_time_transition_name">cardtime</string>
+    <string name="card_ampm_transition_name">cardampm</string>
+    <string name="card_days_transition_name">carddays</string>
 </resources>

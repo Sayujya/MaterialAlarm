@@ -1,6 +1,149 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:id="@+id/repeating_layout"
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    android:layout_centerVertical="true"
+    android:baselineAligned="false"
+    android:orientation="horizontal"
+    android:paddingBottom="@dimen/card_margin_bottom"
+    android:paddingEnd="@dimen/card_margin_right"
+    android:paddingLeft="@dimen/activity_vertical_margin"
+    android:paddingRight="@dimen/card_margin_right"
+    android:paddingStart="@dimen/activity_vertical_margin"
+    android:paddingTop="@dimen/card_margin_top"
+    android:weightSum="7">
 
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center">
+
+        <ToggleButton
+            android:id="@+id/monday_repeating"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:background="?selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:gravity="center"
+            android:textAllCaps="false"
+            android:textColor="@color/daystogglecolor"
+            android:textOff="@string/monday_short"
+            android:textOn="@string/monday_short" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center">
+
+        <ToggleButton
+            android:id="@+id/tuesday_repeating"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:background="?selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:gravity="center"
+            android:textAllCaps="false"
+            android:textColor="@color/daystogglecolor"
+            android:textOff="@string/tuesday_short"
+            android:textOn="@string/tuesday_short" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center">
+
+        <ToggleButton
+            android:id="@+id/wednesday_repeating"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:background="?selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:gravity="center"
+            android:textAllCaps="false"
+            android:textColor="@color/daystogglecolor"
+            android:textOff="@string/wednesday_short"
+            android:textOn="@string/wednesday_short" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center">
+
+        <ToggleButton
+            android:id="@+id/thursday_repeating"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:background="?selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:gravity="center"
+            android:textAllCaps="false"
+            android:textColor="@color/daystogglecolor"
+            android:textOff="@string/thursday_short"
+            android:textOn="@string/thursday_short" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center">
+
+        <ToggleButton
+            android:id="@+id/friday_repeating"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:background="?selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:gravity="center"
+            android:textAllCaps="false"
+            android:textColor="@color/daystogglecolor"
+            android:textOff="@string/friday_short"
+            android:textOn="@string/friday_short" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center">
+
+        <ToggleButton
+            android:id="@+id/sunday_repeating"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:background="?selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:gravity="center"
+            android:textAllCaps="false"
+            android:textColor="@color/daystogglecolor"
+            android:textOff="@string/saturday_short"
+            android:textOn="@string/saturday_short" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center">
+
+        <ToggleButton
+            android:id="@+id/saturday_repeating"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:background="?selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:gravity="center"
+            android:textAllCaps="false"
+            android:textColor="@color/daystogglecolor"
+            android:textOff="@string/sunday_short"
+            android:textOn="@string/sunday_short" />
+    </LinearLayout>
 </LinearLayout>

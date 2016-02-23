@@ -1,27 +1,38 @@
 package com.sairijal.alarm.adapters;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.os.Build;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SwitchCompat;
 import android.text.Spannable;
 import android.text.style.ForegroundColorSpan;
-import android.util.Log;
+import android.support.v4.util.Pair;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.CompoundButton;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.sairijal.alarm.activities.AlarmDetailsActivity;
 import com.sairijal.alarm.R;
 import com.sairijal.alarm.activities.AlarmActivity;
+import com.sairijal.alarm.alarm.Alarm;
 import com.sairijal.alarm.alarm.AlarmWrapper;
+import com.sairijal.alarm.alarm.AlarmWrapperHolder;
 import com.sairijal.alarm.listeners.UndoDeleteListener;
+
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -37,8 +48,16 @@ import io.realm.Realm;
  */
 public class AlarmRecyclerAdapter extends RecyclerView.Adapter<AlarmRecyclerAdapter.ViewHolder> implements ItemTouchHelperAdapter {
 
-    // app tag for log
-    private final String APP_TAG = "com.com.sairijal.alarm";
+    // tag for sending alarm to details activity
+    public static final String ALARM_TAG = "alarm";
+
+    // tags for fields
+    public static final String TIME_TAG = "/time";
+    public static final String AUTHENTICATION_TAG = "/authenticationType";
+    public static final String STATE_TAG = "/state";
+    public static final String LABEL_TAG = "/label";
+    public static final String UNIQUEID_TAG = "/uniqueid";
+    public static final String REPEATING_TAG = "/repeating";
 
     // last removed alarm
     private List<AlarmWrapper> mRemovedAlarm = new ArrayList<AlarmWrapper>();
@@ -62,19 +81,24 @@ public class AlarmRecyclerAdapter extends RecyclerView.Adapter<AlarmRecyclerAdap
 
         public CardView mContainer;
 
+        public RelativeLayout mAlarmCardLayout;
+
         public TextView mAlarmTime;
         public TextView mAlarmAmPm;
         public TextView mAlarmDays;
         public SwitchCompat mAlarmSwitch;
+        public ImageView mAlarmIcon;
 
         public ViewHolder(View itemView) {
             super(itemView);
 
             mContainer = (CardView) itemView.findViewById(R.id.alarm_card);
+            mAlarmCardLayout = (RelativeLayout) itemView.findViewById(R.id.alarm_card_layout);
             mAlarmTime = (TextView) itemView.findViewById(R.id.alarm_time);
             mAlarmAmPm = (TextView) itemView.findViewById(R.id.alarm_ampm);
             mAlarmDays = (TextView) itemView.findViewById(R.id.alarm_days);
             mAlarmSwitch = (SwitchCompat) itemView.findViewById(R.id.alarm_switch);
+            mAlarmIcon = (ImageView) itemView.findViewById(R.id.alarm_card_icon);
         }
     }
 
@@ -124,13 +148,42 @@ public class AlarmRecyclerAdapter extends RecyclerView.Adapter<AlarmRecyclerAdap
 
         final AlarmWrapper mAlarm = mDataset.get(position);
 
-        if (mAlarm!=null) {
+        holder.mAlarmCardLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlarmWrapperHolder.setInstance(mAlarm);
+                Intent alarmDetailsIntent = new Intent(mContext, AlarmDetailsActivity.class);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation((Activity) mContext,
+                            Pair.create((View) holder.mContainer, mContext.getString(R.string.card_transition_name)),
+                            Pair.create((View) holder.mAlarmAmPm, mContext.getString(R.string.card_ampm_transition_name)),
+                            Pair.create((View) holder.mAlarmTime, mContext.getString(R.string.card_time_transition_name)),
+                            Pair.create((View) holder.mAlarmDays, mContext.getString(R.string.card_days_transition_name)));
+                    mContext.startActivity(alarmDetailsIntent, options.toBundle());
+                } else {
+                    mContext.startActivity(alarmDetailsIntent);
+                }
+            }
+        });
 
             String[] alarmTime = mAlarm.getTime();
 
             holder.mAlarmTime.setText(alarmTime[0]);
             holder.mAlarmAmPm.setText(alarmTime[1]);
 
+            holder.mAlarmSwitch.setChecked(mAlarm.getState().equals(Alarm.ON));
+
+                    setAlarmCardIcon(mAlarm.getAuthenticationType(), holder.mAlarmSwitch.isChecked(), holder.mAlarmIcon);
+
+            holder.mAlarmSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    setAlarmCardIcon(mAlarm.getAuthenticationType(), isChecked, holder.mAlarmIcon);
+                    mRealm.beginTransaction();
+                    mAlarm.setState((isChecked) ? Alarm.ON : Alarm.OFF);
+                    mRealm.commitTransaction();
+                }
+            });
 
             boolean repeating[] = mAlarm.getRepeating();
             holder.mAlarmDays.setText(mContext.getResources().getText(R.string.alarm_days_text), TextView.BufferType.SPANNABLE);
@@ -142,24 +195,8 @@ public class AlarmRecyclerAdapter extends RecyclerView.Adapter<AlarmRecyclerAdap
                 }
             }
 
-            // // TODO: 2016-01-28 set alarm icon depending on alarm type
-        /*int image;
-        switch (mAlarm.getAuthenticationType()){
-            case Alarm.DISTANCE:
-                image = R.drawable.ic_location_on_black_24dp;
-                break;
-            case Alarm.MATH:
-                image = R.drawable.ic_exposure_black_24dp;
-                break;
-            default:
-                image = R.drawable.ic_cancel_black_24dp;
-                break;
-        }
-        holder.mAlarmDays.setCompoundDrawablesWithIntrinsicBounds( image, 0, 0, 0);*/
-
             // set animation
             setAnimation(holder.mContainer, position);
-        }
     }
 
     // Return the size of your dataset (invoked by the layout manager)
@@ -255,6 +292,28 @@ public class AlarmRecyclerAdapter extends RecyclerView.Adapter<AlarmRecyclerAdap
 
     public void addRealmObject(Realm realm){
         this.mRealm = realm;
+    }
+
+    public void setAlarmCardIcon(int alarmType, boolean isOn, ImageView alarmCardIcon){
+        if (isOn) {
+            alarmCardIcon.setImageResource(R.drawable.ic_alarm_on_24dp);
+        } else {
+            alarmCardIcon.setImageResource(R.drawable.ic_alarm_off_24dp);
+        }
+        // // TODO: 2016-01-28 set alarm icon depending on alarm type
+        /*int image;
+        switch (mAlarm.getAuthenticationType()){
+            case Alarm.DISTANCE:
+                image = R.drawable.ic_location_on_black_24dp;
+                break;
+            case Alarm.MATH:
+                image = R.drawable.ic_exposure_black_24dp;
+                break;
+            default:
+                image = R.drawable.ic_cancel_black_24dp;
+                break;
+        }
+        holder.mAlarmDays.setCompoundDrawablesWithIntrinsicBounds( image, 0, 0, 0);*/
     }
 
 }

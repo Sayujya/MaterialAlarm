@@ -17,4 +17,6 @@
     <dimen name="secondary_text_size">12sp</dimen>
     <dimen name="clock_text_size">64sp</dimen>
     <dimen name="date_text_size">18sp</dimen>
+    <dimen name="app_bar_height">180dp</dimen>
+    <dimen name="text_margin">16dp</dimen>
 </resources>

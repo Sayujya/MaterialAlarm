@@ -13,6 +13,8 @@
     <color name="materialGreen">#4CAF50</color>
     <color name="materialRed">#F44336</color>
 
+    <color name="black_overlay">#66000000</color>
+
     <!--add night colors here -->
 
 </resources>

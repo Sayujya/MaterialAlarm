@@ -64,12 +64,12 @@ public class AlarmViewFragment extends Fragment {
     public void onStop() {
         super.onStop();
         // clear cached alarm
-        mAdapter.clearAlarms(mRealm);
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
+        mAdapter.clearAlarms(mRealm);
         mRealm.close();
     }
 

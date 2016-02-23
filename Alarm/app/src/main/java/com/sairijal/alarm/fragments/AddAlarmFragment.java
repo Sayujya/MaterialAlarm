@@ -135,6 +135,7 @@ public class AddAlarmFragment extends Fragment {
         newAlarm.setRepeatingSaturday(repeating[5]);
         newAlarm.setRepeatingSunday(repeating[6]);
         newAlarm.setAuthenticationType(alarmType);
+        newAlarm.setState(Alarm.ON);
         newAlarm.setUniqueID(UUID.randomUUID().toString());
 
         mRealm.beginTransaction();

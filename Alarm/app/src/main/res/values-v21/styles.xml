@@ -23,6 +23,7 @@
     <style name="AppTheme.ConfirmButton" parent="Theme.AppCompat.Light">
         <item name="android:colorButtonNormal">@color/materialGreen</item>
     </style>
+
     <style name="AppTheme.CancelButton" parent="Theme.AppCompat.Light">
         <item name="android:colorButtonNormal">@color/materialRed</item>
     </style>

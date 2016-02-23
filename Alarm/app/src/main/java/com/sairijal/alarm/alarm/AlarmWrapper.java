@@ -42,6 +42,10 @@ public class AlarmWrapper implements Comparable<AlarmWrapper> {
         return formatter.format(alarm.getTime()).split(" ", -1);
     }
 
+    public long getTimeLong(){
+        return alarm.getTime();
+    }
+
     public void setTime(long time) {
         this.alarm.setTime(time);
     }
@@ -55,18 +59,10 @@ public class AlarmWrapper implements Comparable<AlarmWrapper> {
     }
 
     public String getState() {
-        switch (this.alarm.getState()){
-            case 3:
-                return "On";
-            case 4:
-                return "Off";
-            case 5:
-                return "Snooze";
-        }
-        return "Error";
+        return this.alarm.getState();
     }
 
-    public void setState(int state) {
+    public void setState(String state) {
         this.alarm.setState(state);
     }
 
@@ -111,30 +107,6 @@ public class AlarmWrapper implements Comparable<AlarmWrapper> {
 
     public void removeFromRealm(){
         this.alarm.removeFromRealm();
-    }
-
-    public static int getDISTANCE() {
-        return Alarm.getDISTANCE();
-    }
-
-    public static int getMATH() {
-        return Alarm.getMATH();
-    }
-
-    public static int getNONE() {
-        return Alarm.getNONE();
-    }
-
-    public static int getON() {
-        return Alarm.getON();
-    }
-
-    public static int getOFF() {
-        return Alarm.getOFF();
-    }
-
-    public static int getSNOOZE() {
-        return Alarm.getSNOOZE();
     }
 
     public static String[] getDays() {
