@@ -48,16 +48,11 @@ import io.realm.Realm;
  */
 public class AlarmRecyclerAdapter extends RecyclerView.Adapter<AlarmRecyclerAdapter.ViewHolder> implements ItemTouchHelperAdapter {
 
-    // tag for sending alarm to details activity
-    public static final String ALARM_TAG = "alarm";
+    // tag for sending alarm position to details activity
+    public static final String ALARM_POSITION_TAG = "alarm";
 
-    // tags for fields
-    public static final String TIME_TAG = "/time";
-    public static final String AUTHENTICATION_TAG = "/authenticationType";
-    public static final String STATE_TAG = "/state";
-    public static final String LABEL_TAG = "/label";
-    public static final String UNIQUEID_TAG = "/uniqueid";
-    public static final String REPEATING_TAG = "/repeating";
+    // tags for adapter
+    public static final String ADAPTER_TAG = "/time";
 
     // last removed alarm
     private List<AlarmWrapper> mRemovedAlarm = new ArrayList<AlarmWrapper>();
@@ -239,12 +234,12 @@ public class AlarmRecyclerAdapter extends RecyclerView.Adapter<AlarmRecyclerAdap
 
         // create arguments for snackbar
         View snackBarView = ((AlarmActivity) mContext).findViewById(R.id.alarm_activity_layout);
-        String[] snackBarText = mRemovedAlarm.get(mRemovedAlarm.size()-1).getTime();
+        String[] snackBarTextTime = mRemovedAlarm.get(mRemovedAlarm.size()-1).getTime();
 
         UndoDeleteListener undoDeleteListener = new UndoDeleteListener(this, position);
 
         // create snackbar, add action and show snackbar
-        Snackbar deletedSnackBar = Snackbar.make(snackBarView, snackBarText[0] + " " + snackBarText[1] + " alarm deleted", Snackbar.LENGTH_LONG);
+        Snackbar deletedSnackBar = Snackbar.make(snackBarView, snackBarTextTime[0] + " " + snackBarTextTime[1] + " alarm deleted", Snackbar.LENGTH_LONG);
         deletedSnackBar.setAction("Undo", undoDeleteListener);
         deletedSnackBar.show();
 
@@ -259,23 +254,19 @@ public class AlarmRecyclerAdapter extends RecyclerView.Adapter<AlarmRecyclerAdap
         // add alarm back to dataset
         mDataset.add(position, restoredAlarm);
 
-        // save to realm
-        mRealm.beginTransaction();
-        mRealm.copyToRealm(restoredAlarm.getAlarm());
-        mRealm.commitTransaction();
-
         // notify the adapter item has been inserted
         notifyItemInserted(position);
 
     }
 
-    public void clearAlarms(Realm realm) {
+    public void clearAlarms() {
         // cleared cached alarm
-        realm.beginTransaction();
+        mRealm.beginTransaction();
         for (AlarmWrapper alarm: mRemovedAlarm){
             alarm.removeFromRealm();
         }
-        realm.commitTransaction();
+        mRemovedAlarm.clear();
+        mRealm.commitTransaction();
     }
 
     public void addAlarm(AlarmWrapper alarm){

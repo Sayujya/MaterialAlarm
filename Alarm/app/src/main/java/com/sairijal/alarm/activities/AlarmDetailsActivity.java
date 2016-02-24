@@ -1,12 +1,18 @@
 package com.sairijal.alarm.activities;
 
+import android.support.v4.app.SharedElementCallback;
+import android.support.v4.view.ViewCompat;
+import android.support.v4.view.ViewPropertyAnimatorListenerAdapter;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.SwitchCompat;
 import android.text.Spannable;
 import android.text.style.ForegroundColorSpan;
+import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -17,6 +23,10 @@ import com.sairijal.alarm.R;
 import com.sairijal.alarm.alarm.Alarm;
 import com.sairijal.alarm.alarm.AlarmWrapper;
 import com.sairijal.alarm.alarm.AlarmWrapperHolder;
+import com.sairijal.alarm.application.AlarmApplication;
+
+import java.util.List;
+import java.util.Map;
 
 import io.realm.Realm;
 
@@ -48,9 +58,23 @@ public class AlarmDetailsActivity extends AppCompatActivity {
 
         fetchIntentData();
         findGeneralViews(findViewById(R.id.alarm_general_activity_card));
-        findDetailedViews(findViewById(R.id.alarm_details_activity_card));
+        final View detailsCard = findViewById(R.id.alarm_details_activity_card);
+        findDetailedViews(detailsCard);
         fillData();
+
+        setEnterSharedElementCallback(new SharedElementCallback() {
+            @Override
+            public void onSharedElementEnd(List<String> sharedElementNames, List<View> sharedElements, List<View> sharedElementSnapshots) {
+                super.onSharedElementEnd(sharedElementNames, sharedElements, sharedElementSnapshots);
+                Log.i(AlarmApplication.APP_TAG, "animation end");
+                Animation slideUp = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slide_in_below);
+                slideUp.setStartOffset(200);
+                detailsCard.setAnimation(slideUp);
+                slideUp.start();
+            }
+        });
     }
+
 
     @Override
     protected void onStop() {
@@ -68,6 +92,15 @@ public class AlarmDetailsActivity extends AppCompatActivity {
         mAlarmTime = (TextView) itemView.findViewById(R.id.alarm_time);
         mAlarmAmPm = (TextView) itemView.findViewById(R.id.alarm_ampm);
         mAlarmDays = (TextView) itemView.findViewById(R.id.alarm_days);
+        mAlarmDays.setText(getResources().getText(R.string.alarm_days_text), TextView.BufferType.SPANNABLE);
+        boolean[] repeatingDays = mAlarm.getRepeating();
+        for (int i = 0; i < repeatingDays.length; i++) {
+            if (repeatingDays[i]) {
+                Spannable span = (Spannable) mAlarmDays.getText();
+                span.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.colorPrimary)), i * 3, (i * 3) + 2,
+                        Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+            }
+        }
         mAlarmDays.setHeight(0);
         mAlarmSwitch = (SwitchCompat) itemView.findViewById(R.id.alarm_switch);
         mAlarmIcon = (ImageView) itemView.findViewById(R.id.alarm_card_icon);
@@ -81,6 +114,11 @@ public class AlarmDetailsActivity extends AppCompatActivity {
         mRepeating[4] = (ToggleButton) itemView.findViewById(R.id.friday_repeating);
         mRepeating[5] = (ToggleButton) itemView.findViewById(R.id.saturday_repeating);
         mRepeating[6] = (ToggleButton) itemView.findViewById(R.id.sunday_repeating);
+        attachDetailedViewListeners();
+    }
+
+    private void attachDetailedViewListeners() {
+
     }
 
     public void setAlarmCardIcon(int alarmType, boolean isOn, ImageView alarmCardIcon){
@@ -111,5 +149,10 @@ public class AlarmDetailsActivity extends AppCompatActivity {
                 mRealm.commitTransaction();
             }
         });
+
+        boolean[] repeatingDays = mAlarm.getRepeating();
+        for (int i=0; i<7; i++){
+            mRepeating[i].setChecked(repeatingDays[i]);
+        }
     }
 }

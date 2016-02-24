@@ -23,7 +23,6 @@ public class UndoDeleteListener implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-
         // undo delete
         mRecyclerAdapter.undoDelete(mPosition);
     }
